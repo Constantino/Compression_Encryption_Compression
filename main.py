@@ -1,6 +1,7 @@
 #!/usr/bin/python2
 from sys import argv, exit
 from Dictionary import Dictionary
+import operator
 
 if __name__ == '__main__':
     
@@ -10,5 +11,5 @@ if __name__ == '__main__':
         exit("Couldn't read text file")
 
     dictionary = Dictionary(file_name)
-    frequencies = dictionary.countWords()
-    print frequencies
+
+    print dictionary.getsortedwords()
