@@ -3,8 +3,8 @@ class Dictionary:
 	def __init__(self, file_name):
 		self._filename = file_name
 
-	def read_file(self,file_name):
-		fileInput = open(file_name, 'r')
+	def read_file(self):
+		fileInput = open(self._filename, 'r')
 		text = fileInput.read()
 		return text
 
