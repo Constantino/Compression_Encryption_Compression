@@ -22,7 +22,7 @@ def rle(s):
     for character in s:
         if character != prev:
             if prev:
-                entry = (prev,count)
+                entry = (count,prev)
                 lst.append(entry)
                 #print lst
 
@@ -33,6 +33,8 @@ def rle(s):
     else:
         entry = (count,character)
         lst.append(entry)
+        #Se elimina ultimo elemento del array (espacio)
+        lst.pop()
         word = ''.join(itertools.imap(str, itertools.chain(*lst)))
     return word
 
