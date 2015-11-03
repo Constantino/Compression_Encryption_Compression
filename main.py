@@ -9,8 +9,10 @@ def replaceWords(file_name, dictionary):
     dicto = dictionary.getdictionary()
     for line in f:
         for word in line.split(" "):
+            word = word.rstrip('\n') #.lower()
             if word in dicto:
-                nstring += dicto[word]
+                nstring = nstring + dicto[word]
+    f.close()
     return nstring
 
 if __name__ == '__main__':
@@ -26,5 +28,4 @@ if __name__ == '__main__':
     #print dictionary.getdictionary()
 
     print replaceWords(file_name, dictionary)
-
 

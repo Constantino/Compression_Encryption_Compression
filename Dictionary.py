@@ -13,6 +13,7 @@ class Dictionary:
         frequencies = dict()
         for line in f:
             for word in line.split(" "):
+                word = word.rstrip('\n') #.lower() Add to count lower case and upper case as the same word
                 frequency = frequencies.get(word, None)
                 if frequency == None:
                     frequencies[word] = 1
@@ -23,14 +24,42 @@ class Dictionary:
     def assignChars(self):
         # ASCII [33, ..., 202]
         dictionary = dict()
+        # code word = secondprefix + firstprefix + charcode
+        firstprefix = 0
+        use_firstprefix = False
+        secondprefix = 0
+        use_secondprefix = False
         charcode = 33 # ASCII code
         for key in self._sortedwords:
-            if charcode < 203:
-                dictionary[key] = chr(charcode)
-            else:
-                charcode = 0
-            charcode += 1
 
+            if charcode == 203:
+                charcode = 33
+                use_firstprefix = True
+
+            if firstprefix == 91:
+                firstprefix = 97
+            elif firstprefix == 123:
+                firstprefix = 65 
+                use_secondprefix = True
+
+            if secondprefix == 91:
+                secondprefix = 97
+            elif secondprefix == 123:
+                secondprefix = 65
+
+            if use_firstprefix == False:
+                dictionary[key] = chr(charcode)
+                charcode += 1
+            elif use_secondprefix == False:
+                dictionary[key] = chr(firstprefix) + chr(charcode)
+                charcode += 1
+                firstprefix += 1
+            else:
+                dictionary[key] = chr(secondprefix) + chr(firstprefix) + chr(charcode)
+                charcode += 1
+                firstprefix += 1
+                secondprefix += 1
+            
         return dictionary
 
 
