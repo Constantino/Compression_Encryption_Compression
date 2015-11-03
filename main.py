@@ -1,6 +1,7 @@
 #!/usr/bin/python2
 from sys import argv, exit
 from Dictionary import Dictionary
+from Compression import bwt, rle
 import operator
 
 def dictionary_encoding(file_name, dictionary):
@@ -29,6 +30,7 @@ def dictionary_decoding(file_name, dictionary):
         decoded_text = decoded_text + inverted_dictionary[word] + ' '
     return decoded_text
 
+
 if __name__ == '__main__':
     
     try:
@@ -36,12 +38,25 @@ if __name__ == '__main__':
     except:
         exit("Couldn't read text file")
 
+    # Create dictionary
     dictionary = Dictionary(file_name)
 
-    #print dictionary.getsortedwords()
-    #print dictionary.getdictionary()
+    # Dictionary encoding
+    encoded_text = dictionary_encoding(file_name, dictionary)
+    print encoded_text
+    with open('dictionary_encoding_output.txt', 'w') as f:
+        f.write(encoded_text)
 
-    with open('output.txt', 'w') as f:
-        f.write(dictionary_encoding(file_name, dictionary))
+    # Burrows-Wheeler Transform
+    bwt_encoded_text = bwt(encoded_text)
+    print bwt_encoded_text
 
-    print dictionary_decoding('output.txt', dictionary)
+    # Run-length encoding
+    rle_encoded_text = rle(bwt_encoded_text)
+    print rle_encoded_text
+
+    # Dictionary decoding
+    decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
+    print decoded_text
+    with open('dictionary_decoding_output.txt', 'w') as f:
+        f.write(decoded_text)
