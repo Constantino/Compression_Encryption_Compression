@@ -32,9 +32,13 @@ class Dictionary:
         charcode = 33 # ASCII code
         for key in self._sortedwords:
 
-            if charcode == 203:
+            if charcode == 205: # One more to get rid of characters 127 (delete) and 92 (\)
                 charcode = 33
                 use_firstprefix = True
+            elif charcode == 92: # Skip character 92
+                charcode = 93
+            elif charcode == 127: # Skip character 127
+                charcode = 128
 
             if firstprefix == 91:
                 firstprefix = 97
