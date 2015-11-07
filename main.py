@@ -31,6 +31,16 @@ def dictionary_decoding(file_name, dictionary):
     return decoded_text
 
 
+def compression_ratio(original_text, compressed_text):
+    # Original text's size
+    original_text_size = original_text.__sizeof__() - 37
+    # Compressed text size
+    compressed_text_size = compressed_text.__sizeof__() - 37
+    # Compression ratio
+    compression_ratio = float(original_text_size) / float(compressed_text_size)
+    return original_text_size, compressed_text_size, compression_ratio
+
+
 if __name__ == '__main__':
     
     try:
@@ -65,13 +75,7 @@ if __name__ == '__main__':
     with open(file_name, 'r') as f:
         original_text = f.read()
 
-    # Original text's size
-    original_text_size = original_text.__sizeof__() - 37
-    # Compressed text size
-    compressed_text_size = rle_encoded_text.__sizeof__() - 37
-
-    # Compression ratio
-    compression_ratio = float(original_text_size) / float(compressed_text_size)
+    original_text_size, compressed_text_size, compression_ratio = compression_ratio(original_text, rle_encoded_text)
 
     print "Original text size: ", original_text_size
     print "Compressed text size: ", compressed_text_size
