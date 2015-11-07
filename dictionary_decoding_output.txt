@@ -1,1 +1,1 @@
-agua leche refresco 
+Its performance is optimal without the need for blocking of input data. It encourages a clear separation between the model for representing data and the encoding of information with respect to that model. It accommodates adaptive models easily. It is computationally efficient. 

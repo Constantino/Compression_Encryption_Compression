@@ -2,7 +2,7 @@
 from sys import argv, exit
 from Dictionary import Dictionary
 from Compression import bwt, rle
-import operator
+
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -60,3 +60,19 @@ if __name__ == '__main__':
     print decoded_text
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
+
+    # Original text
+    with open(file_name, 'r') as f:
+        original_text = f.read()
+
+    # Original text's size
+    original_text_size = original_text.__sizeof__() - 37
+    # Compressed text size
+    compressed_text_size = rle_encoded_text.__sizeof__() - 37
+
+    # Compression ratio
+    compression_ratio = float(original_text_size) / float(compressed_text_size)
+
+    print "Original text size: ", original_text_size
+    print "Compressed text size: ", compressed_text_size
+    print "Compression ratio: ", compression_ratio 
