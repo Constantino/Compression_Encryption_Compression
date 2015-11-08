@@ -48,8 +48,12 @@ if __name__ == '__main__':
     except:
         exit("Couldn't read text file")
 
+    # Original text
+    with open(file_name, 'r') as f:
+        original_text = f.read()
+
     # Create dictionary
-    dictionary = Dictionary(file_name)
+    dictionary = Dictionary(original_text)
 
     # Dictionary encoding
     encoded_text = dictionary_encoding(file_name, dictionary)
@@ -71,12 +75,8 @@ if __name__ == '__main__':
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
 
-    # Original text
-    with open(file_name, 'r') as f:
-        original_text = f.read()
-
     original_text_size, compressed_text_size, compression_ratio = compression_ratio(original_text, rle_encoded_text)
 
-    print "Original text size: ", original_text_size
-    print "Compressed text size: ", compressed_text_size
-    print "Compression ratio: ", compression_ratio 
+    print "Original text size:", original_text_size, "bytes"
+    print "Compressed text size:", compressed_text_size, "bytes"
+    print "Compression ratio:", compression_ratio 
