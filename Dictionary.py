@@ -1,25 +1,14 @@
+#-*- coding: utf-8 -*-
+from functions import frequencies
 class Dictionary:
+    'Dictionary to encode a given text.'
 
-    def __init__(self, file_name):
+    def __init__(self, text):
         # The dictionary will read the string from a text file, so the file name must be specified
-        self._filename = file_name
-        self._frequencies = self.countWords()
-        self._sortedwords = sorted(self._frequencies, key=self._frequencies.get, reverse=True)
+        self._original_text = text
+        self._frequencies = frequencies(self._original_text)
         self._dictionary = self.assignChars() # ASCII assignation
 
-    def countWords(self):
-        # Method for counting the words in the specified file
-        f = open(self._filename, 'r')
-        frequencies = dict()
-        for line in f:
-            for word in line.split(" "):
-                word = word.rstrip('\n') #.lower() Add to count lower case and upper case as the same word
-                frequency = frequencies.get(word, None)
-                if frequency == None:
-                    frequencies[word] = 1
-                else:
-                    frequencies[word] = frequency + 1
-        return frequencies
 
     def assignChars(self):
         # ASCII [33, ..., 202]
@@ -30,7 +19,7 @@ class Dictionary:
         secondprefix = 0
         use_secondprefix = False
         charcode = 33 # ASCII code
-        for key in self._sortedwords:
+        for key in self._frequencies:
 
             if charcode == 205: # One more to get rid of characters 127 (delete) and 92 (\)
                 charcode = 33
@@ -72,9 +61,6 @@ class Dictionary:
 
     def getfrequencies(self):
         return self._frequencies
-
-    def getsortedwords(self):
-        return self._sortedwords
 
     def getdictionary(self):
         return self._dictionary
