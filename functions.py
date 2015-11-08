@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
-from collections import Counter
+from collections import Counter, OrderedDict
 
 def frequencies(text):
 	'Get frequency of every character in the given text.'
 	frequencies = Counter()	
 	for word in text.split(' '):
 		frequencies[word] += 1
-	return frequencies
+	return OrderedDict(frequencies.most_common())
