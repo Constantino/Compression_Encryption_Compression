@@ -2,7 +2,7 @@
 from sys import argv, exit
 from Dictionary import Dictionary
 from Compression import bwt, rle
-
+import timeit
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -52,6 +52,8 @@ if __name__ == '__main__':
     with open(file_name, 'r') as f:
         original_text = f.read()
 
+    tic=timeit.default_timer()
+
     # Create dictionary
     dictionary = Dictionary(original_text)
 
@@ -75,8 +77,11 @@ if __name__ == '__main__':
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
 
+    toc=timeit.default_timer()
+
     original_text_size, compressed_text_size, compression_ratio = compression_ratio(original_text, rle_encoded_text)
 
     print "Original text size:", original_text_size, "bytes"
     print "Compressed text size:", compressed_text_size, "bytes"
     print "Compression ratio:", compression_ratio 
+    print "Time elapsed:", toc-tic, "seconds"
