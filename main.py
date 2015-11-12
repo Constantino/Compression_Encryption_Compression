@@ -1,8 +1,9 @@
 #!/usr/bin/python2
 from sys import argv, exit
+import timeit
 from Dictionary import Dictionary
 from Compression import bwt, rle
-import timeit
+from HuffmanCoding import *
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -21,9 +22,7 @@ def dictionary_decoding(file_name, dictionary):
     with open(file_name, 'r') as f:
         encoded = f.read()
     normal_dictionary = dictionary.getdictionary()
-    print normal_dictionary
     inverted_dictionary = {value: key for key, value in normal_dictionary.iteritems()}
-    print inverted_dictionary
     decoded_text = ''
     encoded = encoded.split(' ')[:-1]
     for word in encoded:
@@ -59,21 +58,24 @@ if __name__ == '__main__':
 
     # Dictionary encoding
     encoded_text = dictionary_encoding(file_name, dictionary)
-    print encoded_text
+    #print encoded_text
     with open('dictionary_encoding_output.txt', 'w') as f:
         f.write(encoded_text)
 
     # Burrows-Wheeler Transform
     bwt_encoded_text = bwt(encoded_text)
-    print bwt_encoded_text
+    #print bwt_encoded_text
 
     # Run-length encoding
     rle_encoded_text = rle(bwt_encoded_text)
-    print rle_encoded_text
+    #print rle_encoded_text
+
+    # Huffman coding
+    huffman_code = create_tree(rle_encoded_text)
 
     # Dictionary decoding
     decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
-    print decoded_text
+    #print decoded_text
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
 

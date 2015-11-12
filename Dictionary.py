@@ -7,7 +7,6 @@ class Dictionary:
         # The dictionary will read the string from a text file, so the file name must be specified
         self._original_text = text
         self._frequencies = frequencies(self._original_text)
-        print self._frequencies
         self._dictionary = self.assignChars() # ASCII assignation
 
 
