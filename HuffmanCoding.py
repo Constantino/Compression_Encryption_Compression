@@ -1,9 +1,9 @@
 import heapq
-from collections import Counter
+from collections import Counter, OrderedDict
 
 class Node():
 
-	def __init__(self, item, weight):
+	def __init__(self, item, frequency):
 		self._item = item
 		self._frequency = frequency
 
@@ -15,7 +15,8 @@ class Node():
 		return cmp(self._frequency, frequency)
 
 	def __repr__(self):
-		return "%s - %s \t %s - %s" % (self._item, self._frequency, self._left, self._right)
+		return "%s-%s" % (self._item, self._frequency)
 
 def create_tree(string):
-	return string
+	nodes = [Node(e, f) for e, f in Counter(string).items()]
+	return nodes

@@ -72,6 +72,7 @@ if __name__ == '__main__':
 
     # Huffman coding
     huffman_code = create_tree(rle_encoded_text)
+    print huffman_code
 
     # Dictionary decoding
     decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
