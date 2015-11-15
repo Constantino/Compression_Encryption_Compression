@@ -1,15 +1,20 @@
 import heapq
-from collections import Counter, OrderedDict
+from collections import Counter
 
 class Node():
 
 	def __init__(self, name, frequency):
 		self._name = name
 		self._frequency = frequency
+		self._left = None
+		self._right = None
 
-	def children(self, left_node, right_node):
+	def setChildren(self, left_node, right_node):
 		self._left = left_node
 		self._right = right_node
+
+	def getChildren(self):
+		return self._left, self._right
 
 	def __cmp__(self, frequency):
 		return cmp(self._frequency, frequency)
@@ -24,8 +29,22 @@ def create_tree(string):
 		left_node = heapq.heappop(nodes)
 		right_node = heapq.heappop(nodes)
 		new_node = Node(left_node._name+right_node._name, left_node._frequency+right_node._frequency)		
-		new_node.children(left_node, right_node)
-		print new_node
+		new_node.setChildren(left_node, right_node)
+		#print new_node
 		heapq.heappush(nodes, new_node)
-	return nodes
+	return nodes[0]
 
+# Huffman code
+leafs = {}
+
+def postorder(node, code):
+    if node is not None:
+        if node._left is None and node._right is None:
+            leafs[node._name] = code
+        postorder(node._left, code + '0')
+        postorder(node._right, code + '1')
+
+def huffman_code(string):
+    root = create_tree(string)
+    postorder(root, '')
+    return leafs
