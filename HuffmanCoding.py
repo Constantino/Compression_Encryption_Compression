@@ -34,17 +34,17 @@ def create_tree(string):
 		heapq.heappush(nodes, new_node)
 	return nodes[0]
 
-# Huffman code
+# Dictionary with Huffman codes
 leafs = {}
 
-def postorder(node, code):
+def get_codes(node, code):
     if node is not None:
         if node._left is None and node._right is None:
             leafs[node._name] = code
-        postorder(node._left, code + '0')
-        postorder(node._right, code + '1')
+        get_codes(node._left, code + '0')
+        get_codes(node._right, code + '1')
 
 def huffman_code(string):
     root = create_tree(string)
-    postorder(root, '')
+    get_codes(root, '')
     return leafs
