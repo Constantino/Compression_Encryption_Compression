@@ -3,11 +3,7 @@ from sys import argv, exit
 import timeit
 from Dictionary import Dictionary
 from Compression import bwt, rle
-<<<<<<< HEAD
 from HuffmanCoding import encode as huffman_encode
-=======
-from HuffmanCoding import *
->>>>>>> 6be1f504d721d82f677b9ea23c6b244f0b82ef51
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -75,15 +71,10 @@ if __name__ == '__main__':
     #print rle_encoded_text
 
     # Huffman coding
-<<<<<<< HEAD
     huffman_encoded_text = huffman_encode(rle_encoded_text)
     print huffman_encoded_text
     with open('huffman_encoded_text', 'wb') as f:
         f.write(huffman_encoded_text)
-=======
-    huffman_code = huffman_code(rle_encoded_text)
-    print huffman_code
->>>>>>> 6be1f504d721d82f677b9ea23c6b244f0b82ef51
 
     # Dictionary decoding
     decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
