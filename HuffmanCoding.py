@@ -53,20 +53,35 @@ class HuffmanCode:
     def huffman_code(self):
         root = self.create_tree()
         self.get_codes(root, '')
-        return self._codes
+        return root, self._codes
 
 ##################################################################
 
 def encode(string):
     huffman_code = HuffmanCode(string)
-    codes = huffman_code.huffman_code()
+    root, codes = huffman_code.huffman_code()
     encoded = ""
     for e in string:
         encoded += codes[e]
-    new_binary = [encoded[i:i+8] for i in xrange(0, len(encoded), 8)]
+    new_binary = [encoded[i:i+8] for i in range(0, len(encoded), 8)]
     new_string = [chr(int(binary, 2)) for binary in new_binary]
     new_string = "".join(new_string)
-    return new_string
-        
-def decode(encoded):
-    return encoded
+    return new_string, root
+
+def get_symbol(node, bits, index):
+    if node._left is None and node._right is None:
+        return node._name, index
+    if bits[index] == '0':
+        return get_symbol(node._left, bits, index+1)
+    else:
+        return get_symbol(node._right, bits, index+1)
+
+def decode(encoded, root):
+    decoded = ""
+    binary = ''.join(["{0:b}".format(ord(c)).zfill(8) for c in encoded[:-1]])
+    binary += "{0:b}".format(ord(encoded[-1])) # Add last character to binary string without padding with zeroes 
+    index = 0
+    while index < len(binary):
+        symbol, index = get_symbol(root, binary, index)
+        decoded += symbol
+    return decoded

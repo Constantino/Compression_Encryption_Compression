@@ -4,6 +4,7 @@ import timeit
 from Dictionary import Dictionary
 from Compression import bwt, rle
 from HuffmanCoding import encode as huffman_encode
+from HuffmanCoding import decode as huffman_decode
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -68,13 +69,17 @@ if __name__ == '__main__':
 
     # Run-length encoding
     rle_encoded_text = rle(bwt_encoded_text)
-    #print rle_encoded_text
+    print rle_encoded_text
 
     # Huffman coding
-    huffman_encoded_text = huffman_encode(rle_encoded_text)
+    huffman_encoded_text, huffman_root = huffman_encode(rle_encoded_text) # The root will be necessary to decode
     print huffman_encoded_text
     with open('huffman_encoded_text', 'wb') as f:
         f.write(huffman_encoded_text)
+
+    # Huffman decoding
+    huffman_decoded_text = huffman_decode(huffman_encoded_text, huffman_root)
+    print huffman_decoded_text
 
     # Dictionary decoding
     decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
