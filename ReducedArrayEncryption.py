@@ -11,14 +11,13 @@ class ReducedArrayEncryption:
 		self.fill_ta_key(self._rle_output)
 
 		data_encrypted = []
-		i = 1
-		l = 1
+		i = 0
 		len_rle_output = len(self._rle_output)
-
-		while i <= len_rle_output:
+		
+		while i < len_rle_output:
 			s = 0
 			for j in range(3):
-				s += ord(self._rle_output[i])*self._primary_key[j]
+				s += ord(self._rle_output[i+j])*self._primary_key[j]
 			data_encrypted.append(s)
 			i+=3
 
