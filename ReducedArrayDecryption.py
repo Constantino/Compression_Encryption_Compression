@@ -28,7 +28,6 @@ class ReducedArrayDecryption:
 			EST = 0
 			for k in range(3):
 				EST += ord(t[k]) * self._primary_key[k]
-				EST = EST%255
 			print "--- comb: ", t[0]," ", t[1]," ", t[2]
 			print "*** est: ",EST," - ",self._data[0]
 			if EST == self._data[0]:
@@ -38,11 +37,14 @@ class ReducedArrayDecryption:
 				s1 += 1
 				if s1 >= len_ta_key:
 					s2 += 1
-					s1 = 1	
+					s1 = 0	
 				if s2 >= len_ta_key:
 					s3 += 1
-					s2 = 1
+					#s1 = 0
+					s2 = 0
 				if s3 >= len_ta_key:
-					s3 = 1
+					#s1 = 1
+					#s2 = 1
+					s3 = 0
 
 		return original_data
