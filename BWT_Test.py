@@ -1,12 +1,11 @@
-from BWT import BWT
+from BWT import BWT, invert_BWT
 
-x = BWT()
 string = "^BANANA@"
-bwt = x.get_BWT(string)
-original_string = x.invert_BWT(bwt)
+transformed_string = BWT(string)
+original_string = invert_BWT(transformed_string)
 
 print string
-print bwt
+print transformed_string
 print original_string
 
 

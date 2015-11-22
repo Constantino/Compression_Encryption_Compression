@@ -2,9 +2,9 @@
 from sys import argv, exit
 import timeit
 from Dictionary import Dictionary
-from Compression import bwt, rle
 from HuffmanCoding import encode as huffman_encode
 from HuffmanCoding import decode as huffman_decode
+from jnius import autoclass
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
