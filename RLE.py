@@ -17,7 +17,6 @@ def invert_rle(string):
 	inv_rle = ''
 	pattern = re.compile("[0-9]+|\\p{ASCII}")
 	for g in re.finditer(pattern, string):
-		for e in xrange(int(g.group())):
-			inv_rle += string[g.end()]
+		inv_rle += string[g.end()] * int(g.group())
 	return inv_rle
 
