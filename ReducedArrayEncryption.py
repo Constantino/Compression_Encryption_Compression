@@ -24,6 +24,14 @@ class ReducedArrayEncryption:
 
 		return self._ta_key, data_encrypted
 	
+	def get_text_encrypted(self,data_encrypted):
+		string = ""
+
+		for e in data_encrypted:
+			string += str(e)+"."
+
+		return string
+
 	def pre_process_rle(self):
 		f = self._len_rle_output - self._len_rle_output%3 + 3
 		self._rle_output = self._rle_output.ljust(f,'0')
@@ -32,5 +40,6 @@ class ReducedArrayEncryption:
 		for e in self._rle_output:
 			if e not in self._ta_key:
 				self._ta_key.append(e)
+		self._ta_key.append('0')
 
 
