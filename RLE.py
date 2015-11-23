@@ -8,15 +8,15 @@ def rle(string):
 		while index+1 < len(string) and string[index] == string[index+1]:
 			counter += 1
 			index += 1
-		rle_string += str(counter)
+		rle_string += ' ' + str(counter) + ' '
 		rle_string += string[index]
 		index += 1
 	return rle_string
 
 def invert_rle(string):
 	inv_rle = ''
-	pattern = re.compile("[0-9]+|\\p{ASCII}")
+	pattern = re.compile(" (.*?) ")
 	for g in re.finditer(pattern, string):
-		inv_rle += string[g.end()] * int(g.group())
+		inv_rle += string[g.end()] * int(g.group().lstrip(' ').rstrip(' '))
 	return inv_rle
 
