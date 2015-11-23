@@ -5,6 +5,8 @@ from Dictionary import Dictionary
 from HuffmanCoding import encode as huffman_encode
 from HuffmanCoding import decode as huffman_decode
 from jnius import autoclass
+from BWT import BWT, invert_BWT
+from RLE import rle, invert_rle
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -19,9 +21,9 @@ def dictionary_encoding(file_name, dictionary):
     return nstring
 
 
-def dictionary_decoding(file_name, dictionary):
-    with open(file_name, 'r') as f:
-        encoded = f.read()
+def dictionary_decoding(encoded, dictionary):
+#    with open(file_name, 'r') as f:
+#        encoded = f.read()
     normal_dictionary = dictionary.getdictionary()
     inverted_dictionary = {value: key for key, value in normal_dictionary.iteritems()}
     decoded_text = ''
@@ -57,33 +59,51 @@ if __name__ == '__main__':
     # Create dictionary
     dictionary = Dictionary(original_text)
 
+    ###############################################################################################
+    ####  Compression-Encryption-Compression
+
     # Dictionary encoding
     encoded_text = dictionary_encoding(file_name, dictionary)
-    #print encoded_text
+    print "Dictionary encoded", encoded_text
     with open('dictionary_encoding_output.txt', 'w') as f:
         f.write(encoded_text)
 
     # Burrows-Wheeler Transform
-    bwt_encoded_text = bwt(encoded_text)
-    #print bwt_encoded_text
+    bwt_encoded_text = BWT(encoded_text)
+    print "BWT", bwt_encoded_text
 
     # Run-length encoding
     rle_encoded_text = rle(bwt_encoded_text)
-    print rle_encoded_text
+    print "RLE", rle_encoded_text
+
+    # Encryption
+
 
     # Huffman coding
     huffman_encoded_text, huffman_root = huffman_encode(rle_encoded_text) # The root will be necessary to decode
-    print huffman_encoded_text
+    print "Huffman", huffman_encoded_text
     with open('huffman_encoded_text', 'wb') as f:
         f.write(huffman_encoded_text)
 
+    ###############################################################################################
+    ####  Decompression-Decryption-Decompression
+
     # Huffman decoding
     huffman_decoded_text = huffman_decode(huffman_encoded_text, huffman_root)
-    print huffman_decoded_text
+    print "Huffman decoded", huffman_decoded_text
+
+    # Run-length decoding
+    rle_decoded_text = invert_rle(huffman_decoded_text)
+    print "RLE inverse", rle_decoded_text    
+
+    # Burrows-Wheeler Transform
+    bwt_decoded_text = invert_BWT(rle_decoded_text)
+    print "BWT inverse", bwt_decoded_text
 
     # Dictionary decoding
-    decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
-    #print decoded_text
+    #decoded_text = dictionary_decoding('dictionary_encoding_output.txt', dictionary)
+    decoded_text = dictionary_decoding(bwt_decoded_text, dictionary)
+    print "Dictionary decoded", decoded_text
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
 
