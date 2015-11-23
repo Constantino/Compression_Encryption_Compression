@@ -18,7 +18,7 @@ text_encrypted = a.encrypt()
 print "text_encrypted",text_encrypted
 
 new_text = a.get_text_encrypted(text_encrypted[1])
-
+print "new_text: ", new_text
 b = ReducedArrayDecryption(new_text,key,text_encrypted[0]) 
 
 print "original text: ", b.decrypt()

@@ -60,4 +60,16 @@ class ReducedArrayDecryption:
 
 			original_data.append( t )
 
-		return original_data
+		return self.format_string(original_data)
+
+	def format_string(self, data):
+		string = ""
+		for e in data:
+			temp = ""
+			for c in e:
+				temp += c
+			string += temp
+		return string
+
+
+
