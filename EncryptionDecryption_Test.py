@@ -8,15 +8,18 @@ factor = 4
 
 k = KeyGenerator()
 key = k.generate_key(start_value,max_value,factor)
-print key
+print "key: ",key
 
-string = "abcde"
+string = "mytextisjusttext"
+print "string: ",string
+
 a = ReducedArrayEncryption(string,key)
 text_encrypted = a.encrypt()
-print text_encrypted
+print "text_encrypted",text_encrypted
 
-print a.get_text_encrypted(text_encrypted[1])
+new_text = a.get_text_encrypted(text_encrypted[1])
 
-b = ReducedArrayDecryption(text_encrypted[1],key,text_encrypted[0])
-print b.decrypt()
+b = ReducedArrayDecryption(new_text,key,text_encrypted[0]) 
+
+print "original text: ", b.decrypt()
 

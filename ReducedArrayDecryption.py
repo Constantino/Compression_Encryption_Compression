@@ -2,8 +2,21 @@ class ReducedArrayDecryption:
 
 	def __init__(self, data, primary_key, ta_key):
 		self._data = data
+		self.pre_process_string()
 		self._primary_key = primary_key
 		self._ta_key = ta_key
+
+	def pre_process_string(self):
+		data = []
+		temp = ""
+		for c in self._data:
+			if c != ".":
+				temp += c
+			else:
+				data.append(int(temp))
+				temp = ""
+
+		self._data = data
 
 	def decrypt(self):
 
