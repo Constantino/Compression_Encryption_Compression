@@ -4,7 +4,6 @@ import timeit
 from Dictionary import Dictionary
 from HuffmanCoding import encode as huffman_encode
 from HuffmanCoding import decode as huffman_decode
-from jnius import autoclass
 from BWT import BWT, invert_BWT
 from RLE import rle, invert_rle
 from KeyGenerator import KeyGenerator
@@ -92,7 +91,7 @@ if __name__ == '__main__':
     encrypted = a.encrypt()
     encrypted_text = a.get_text_encrypted(encrypted[1])
     print "Encrypted"
-    print encrypted_text
+    encrypted_text
 
     ########################
 
