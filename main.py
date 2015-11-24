@@ -79,8 +79,8 @@ if __name__ == '__main__':
     print "RLE", rle_encoded_text
 
     ###### Encryption ######
-    start_value = 3
-    max_value = 10
+    start_value = 9
+    max_value = 83
     factor = 4
 
     k = KeyGenerator()
