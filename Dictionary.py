@@ -64,3 +64,22 @@ class Dictionary:
 
     def getdictionary(self):
         return self._dictionary
+
+
+def dictionary_encoding(text, dictionary):
+    nstring = ''
+    dicto = dictionary.getdictionary()
+    for word in text.split():
+        if word in dicto:
+            nstring = nstring + dicto[word] + ' '
+    return nstring
+
+
+def dictionary_decoding(encoded, dictionary):
+    normal_dictionary = dictionary.getdictionary()
+    inverted_dictionary = {value: key for key, value in normal_dictionary.iteritems()}
+    decoded_text = ''
+    encoded = encoded.split(' ')[:-1]
+    for word in encoded:
+        decoded_text = decoded_text + inverted_dictionary[word] + ' '
+    return decoded_text
