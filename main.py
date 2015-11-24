@@ -7,6 +7,9 @@ from HuffmanCoding import decode as huffman_decode
 from jnius import autoclass
 from BWT import BWT, invert_BWT
 from RLE import rle, invert_rle
+from KeyGenerator import KeyGenerator
+from ReducedArrayEncryption import ReducedArrayEncryption 
+from ReducedArrayDecryption import ReducedArrayDecryption
 
 def dictionary_encoding(file_name, dictionary):
     f = open(file_name, 'r')
@@ -76,24 +79,46 @@ if __name__ == '__main__':
     rle_encoded_text = rle(bwt_encoded_text)
     print "RLE", rle_encoded_text
 
-    # Encryption
+    ###### Encryption ######
+    start_value = 3
+    max_value = 10
+    factor = 4
 
+    k = KeyGenerator()
+    key = k.generate_key(start_value,max_value,factor)
+    print key
+
+    a = ReducedArrayEncryption(rle_encoded_text,key)
+    encrypted = a.encrypt()
+    encrypted_text = a.get_text_encrypted(encrypted[1])
+    print "Encrypted"
+    print encrypted_text
+
+    ########################
 
     # Huffman coding
-    huffman_encoded_text, huffman_root = huffman_encode(rle_encoded_text) # The root will be necessary to decode
+    huffman_encoded_text, huffman_root = huffman_encode(encrypted_text) # The root will be necessary to decode
     print "Huffman", huffman_encoded_text
     with open('huffman_encoded_text', 'wb') as f:
         f.write(huffman_encoded_text)
+
 
     ###############################################################################################
     ####  Decompression-Decryption-Decompression
 
     # Huffman decoding
     huffman_decoded_text = huffman_decode(huffman_encoded_text, huffman_root)
-    print "Huffman decoded", huffman_decoded_text
+    print "Huffman decoded"
+    print huffman_decoded_text
+
+    ###### Decryption ######
+    b = ReducedArrayDecryption(encrypted_text,key,encrypted[0]) 
+    decrypted_text = b.decrypt()
+    print "Decrypted text", decrypted_text
+    ########################
 
     # Run-length decoding
-    rle_decoded_text = invert_rle(huffman_decoded_text)
+    rle_decoded_text = invert_rle(decrypted_text)
     print "RLE inverse", rle_decoded_text    
 
     # Burrows-Wheeler Transform
@@ -106,6 +131,8 @@ if __name__ == '__main__':
     print "Dictionary decoded", decoded_text
     with open('dictionary_decoding_output.txt', 'w') as f:
         f.write(decoded_text)
+
+    ###############################################################################################
 
     toc=timeit.default_timer()
 
