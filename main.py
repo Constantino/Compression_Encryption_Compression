@@ -90,8 +90,7 @@ if __name__ == '__main__':
     a = ReducedArrayEncryption(rle_encoded_text,key)
     encrypted = a.encrypt()
     encrypted_text = a.get_text_encrypted(encrypted[1])
-    print "Encrypted"
-    encrypted_text
+    print "Encrypted", encrypted_text
 
     ########################
 

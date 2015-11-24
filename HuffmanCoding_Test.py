@@ -2,7 +2,7 @@ from HuffmanCoding import encode as huffman_encode
 from HuffmanCoding import decode as huffman_decode
 
 
-text = "asdffdll"
+text = "l"
 
 # Huffman coding
 huffman_encoded_text, huffman_root = huffman_encode(text) # The root will be necessary to decode

@@ -69,10 +69,7 @@ def encode(string):
     encoded = ""
     for e in string:
         encoded += codes[e]
-    print codes
-    print "encoded", encoded
     new_binary = [encoded[i:i+8] for i in range(0, len(encoded), 8)]
-    print "last new_binary", new_binary[-1]
     new_string = [chr(int(binary, 2)) for binary in new_binary[:-1]]
     new_string = "".join(new_string)
     last_bits = [str(bit) for bit in new_binary[-1]]
@@ -90,7 +87,6 @@ def get_symbol(node, bits, index):
 
 def decode(encoded, root):
     decoded = ""
-    print "encoded", encoded
     for i in xrange(len(encoded)):
         encoded[i]
 
