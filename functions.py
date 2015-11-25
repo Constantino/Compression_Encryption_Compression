@@ -12,6 +12,12 @@ def frequencies(text):
 
     return OrderedDict(frequencies.most_common())
 
+def frequencies_bwt(text):
+    new_text = ""
+    for e in text:
+        new_text += e + " "
+
+    return frequencies(new_text)
 
 def frequencies_val(text):
     

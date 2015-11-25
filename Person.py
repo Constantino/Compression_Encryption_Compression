@@ -6,7 +6,7 @@ from RLE import rle, invert_rle
 from KeyGenerator import KeyGenerator
 from ReducedArrayEncryption import ReducedArrayEncryption 
 from ReducedArrayDecryption import ReducedArrayDecryption
-from functions import frequencies, frequencies_val
+from functions import frequencies, frequencies_val,frequencies_bwt
 
 class Person():
     def __init__(self, name):
@@ -47,10 +47,10 @@ class Person():
         for e in bwt_encoded_text:
             t.append(e)
         
-        with open('Results/bwt_encoded_text.txt', 'w') as f:
+        with open('Results/bwt_output.txt', 'w') as f:
+            f.write("frequencies: \n\n"+str(frequencies_bwt(bwt_encoded_text))+"\n\nEncoded text:\n\n")
             f.write(str(t))
-        with open('Results/bwt_compression_ratio.txt', 'w') as f:
-            f.write("len_original_text: "+str(len_original_text)+"\n")
+            f.write("\n\nlen_original_text: "+str(len_original_text)+"\n")
             f.write("len_bwt_encoded_text: "+str(len(bwt_encoded_text))+"\n")
             f.write("Compression ratio: "+str(len_original_text/len(bwt_encoded_text)))
 
