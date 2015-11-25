@@ -12,6 +12,13 @@ class Person():
     def __init__(self, name):
         self._name = name
 
+    def send_text_to_list(self,text):
+        #workaround: Pass it as dictionary for storing encoded text to 
+        t = []
+        for e in text:
+            t.append(e)
+        return t
+
     def send(self, original_text):
         print "original text"
         print original_text
@@ -41,15 +48,10 @@ class Person():
         bwt_encoded_text = BWT(encoded_text)
         print "BWT:"
         print bwt_encoded_text
-        
-        #workaround: Pass it as dictionary for storing the bwt_encoded_text in the file
-        t = []
-        for e in bwt_encoded_text:
-            t.append(e)
-        
+       
         with open('Results/bwt_output.txt', 'w') as f:
             f.write("frequencies: \n\n"+str(frequencies_bwt(bwt_encoded_text))+"\n\nEncoded text:\n\n")
-            f.write(str(t))
+            f.write(str(self.send_text_to_list(bwt_encoded_text)))
             f.write("\n\nlen_original_text: "+str(len_original_text)+"\n")
             f.write("len_bwt_encoded_text: "+str(len(bwt_encoded_text))+"\n")
             f.write("Compression ratio: "+str(len_original_text/len(bwt_encoded_text)))
@@ -67,10 +69,10 @@ class Person():
         print "l_RLE: ",l_RLE
 
         with open('Results/rle_encoded_text_and_compression_ratio.txt', 'w') as f:
-            f.write("original_text: \n")
-            f.write(original_text)
-            f.write("\n\nRLE encoded text:\n")
-            f.write(rle_encoded_text)
+
+            f.write("RLE encoded text:\n")
+            f.write(str(self.send_text_to_list(rle_encoded_text)))
+            f.write("\n\nFrequencies: \n\n"+str(frequencies_bwt(rle_encoded_text)))
             f.write("\n\nl_dictionary: "+str(l_original_text)+"\nl_RLE: "+str(l_RLE))
             f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/l_RLE))
 
