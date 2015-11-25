@@ -12,7 +12,7 @@ def frequencies(text):
 
     return OrderedDict(frequencies.most_common())
 
-def frequencies_bwt(text):
+def frequencies_from_dictionary(text):
     new_text = ""
     for e in text:
         new_text += e + " "

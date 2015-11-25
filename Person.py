@@ -6,7 +6,7 @@ from RLE import rle, invert_rle
 from KeyGenerator import KeyGenerator
 from ReducedArrayEncryption import ReducedArrayEncryption 
 from ReducedArrayDecryption import ReducedArrayDecryption
-from functions import frequencies, frequencies_val,frequencies_bwt
+from functions import frequencies, frequencies_val,frequencies_from_dictionary
 
 class Person():
     def __init__(self, name):
@@ -50,7 +50,7 @@ class Person():
         print bwt_encoded_text
        
         with open('Results/bwt_output.txt', 'w') as f:
-            f.write("frequencies: \n\n"+str(frequencies_bwt(bwt_encoded_text))+"\n\nEncoded text:\n\n")
+            f.write("frequencies: \n\n"+str(frequencies_from_dictionary(bwt_encoded_text))+"\n\nEncoded text:\n\n")
             f.write(str(self.send_text_to_list(bwt_encoded_text)))
             f.write("\n\nlen_original_text: "+str(len_original_text)+"\n")
             f.write("len_bwt_encoded_text: "+str(len(bwt_encoded_text))+"\n")
@@ -72,7 +72,7 @@ class Person():
 
             f.write("RLE encoded text:\n")
             f.write(str(self.send_text_to_list(rle_encoded_text)))
-            f.write("\n\nFrequencies: \n\n"+str(frequencies_bwt(rle_encoded_text)))
+            f.write("\n\nFrequencies: \n\n"+str(frequencies_from_dictionary(rle_encoded_text)))
             f.write("\n\nl_dictionary: "+str(l_original_text)+"\nl_RLE: "+str(l_RLE))
             f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/l_RLE))
 
