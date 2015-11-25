@@ -1,0 +1,4 @@
+Dictionary: 
+{'and': '&', 'optimal': ';', 'encoding': "'", 'encourages': '(', 'is': '#', 'model.': '*', 'need': '+', 'respect': ',', 'data': '<', 'information': '-', 'data.': '.', 'computationally': '/', 'for': '$', 'easily.': '7', 'efficient.': '1', 'to': '2', 'between': '4', 'input': '5', 'adaptive': '6', 'model': 'B', 'that': '8', 'models': '3', 'separation': ':', 'performance': ')', 'representing': '0', 'blocking': '=', 'a': '>', 'of': '%', 'clear': '?', 'with': '9', 'It': '"', 'accommodates': '@', 'without': 'A', 'the': '!', 'Its': 'C'}
+
+Compression ratio: 5.61904761905
