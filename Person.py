@@ -22,6 +22,9 @@ class Person():
         encoded_text = dictionary_encoding(original_text, dictionary)
         print "Dictionary encoded"
         print encoded_text
+        with open('Results/2_dictionary_encoding_output.txt', 'w') as f:
+            f.write("Encoded text: ")
+            f.write(encoded_text)
         with open('dictionary_encoding_output.txt', 'w') as f:
             f.write(encoded_text)
 

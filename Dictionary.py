@@ -9,6 +9,16 @@ class Dictionary:
         self._frequencies = frequencies(self._original_text)
         self._dictionary = self.assignChars() # ASCII assignation
 
+    def get_self_compression_ratio(self,dictionary):
+
+        l_key = int()
+        l_value = int()
+
+        for e in dictionary:
+            l_key += len(e)
+            l_value += len(dictionary[e])
+
+        return (1.0*l_key)/l_value
 
     def assignChars(self):
         # ASCII [33, ..., 202]
@@ -72,6 +82,12 @@ def dictionary_encoding(text, dictionary):
     for word in text.split():
         if word in dicto:
             nstring = nstring + dicto[word] + ' '
+    print "*** Dictionary: ",dicto
+    with open('Results/1_dictionary.txt', 'w') as f:
+            string = "Dictionary: \n"
+            string += str(dicto)
+            string += "\n\nCompression ratio: "+str(dictionary.get_self_compression_ratio(dicto))
+            f.write(string)
     return nstring
 
 
