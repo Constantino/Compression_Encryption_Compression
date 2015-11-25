@@ -6,6 +6,7 @@ from RLE import rle, invert_rle
 from KeyGenerator import KeyGenerator
 from ReducedArrayEncryption import ReducedArrayEncryption 
 from ReducedArrayDecryption import ReducedArrayDecryption
+from functions import frequencies, frequencies_val
 
 class Person():
     def __init__(self, name):
@@ -30,7 +31,8 @@ class Person():
 
         with open('Results/dictionary_encoding_output_and_compression_ratio.txt', 'w') as f:
             f.write("Encoded text: \n")
-            f.write(encoded_text)
+            f.write(encoded_text+"\n\nFrequencies after dictionary applied:\n")
+            f.write(str(frequencies(encoded_text)))
             f.write("\n\nCompression ratio: "+str(len_original_text/len(encoded_text)))
         with open('dictionary_encoding_output.txt', 'w') as f:
             f.write(encoded_text)
