@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from functions import frequencies
+from functions import frequencies, frequencies_val
 class Dictionary:
     'Dictionary to encode a given text.'
 
@@ -11,13 +11,15 @@ class Dictionary:
 
     def get_self_compression_ratio(self,dictionary):
 
+        freq = frequencies_val(self._original_text)
         l_key = int()
         l_value = int()
 
         for e in dictionary:
-            l_key += len(e)
-            l_value += len(dictionary[e])
+            l_key += len(e)*freq[e]
+            l_value += len(dictionary[e])*freq[e]
 
+        print "l_key: ",l_key," l_value: ",l_value
         return (1.0*l_key)/l_value
 
     def assignChars(self):
@@ -83,7 +85,7 @@ def dictionary_encoding(text, dictionary):
         if word in dicto:
             nstring = nstring + dicto[word] + ' '
     print "*** Dictionary: ",dicto
-    with open('Results/1_dictionary.txt', 'w') as f:
+    with open('Results/dictionary_and_compression_ratio.txt', 'w') as f:
             string = "Dictionary: \n"
             string += str(dicto)
             string += "\n\nCompression ratio: "+str(dictionary.get_self_compression_ratio(dicto))
