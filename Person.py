@@ -73,7 +73,7 @@ class Person():
             f.write("RLE encoded text:\n")
             f.write(str(self.send_text_to_list(rle_encoded_text)))
             f.write("\n\nFrequencies: \n\n"+str(frequencies_from_dictionary(rle_encoded_text)))
-            f.write("\n\nl_dictionary: "+str(l_original_text)+"\nl_RLE: "+str(l_RLE))
+            f.write("\n\nlen_original_text: "+str(l_original_text)+"\nlen_RLE: "+str(l_RLE))
             f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/l_RLE))
 
         print "RLE"
@@ -93,6 +93,15 @@ class Person():
         encrypted_text = a.get_text_encrypted(encrypted[1])
         print "Encrypted"
         print encrypted_text
+
+
+        with open('Results/Begum_Venkataramani_output.txt', 'w') as f:
+
+            f.write("Begum_Venkataramani:\n")
+            f.write(str(encrypted_text))
+            f.write("\n\nFrequencies: \n\n"+str(frequencies(rle_encoded_text)))
+            f.write("\n\nlen_original_text: "+str(l_original_text)+"\nlen_RLE: "+str(len(encrypted_text)))
+            f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/len(encrypted_text)))
 
         ########################
 
