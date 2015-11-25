@@ -42,8 +42,13 @@ class Person():
         print "BWT:"
         print bwt_encoded_text
         
+        #workaround: Pass it as dictionary for storing the bwt_encoded_text in the file
+        t = []
+        for e in bwt_encoded_text:
+            t.append(e)
+        
         with open('Results/bwt_encoded_text.txt', 'w') as f:
-            f.write(str(bwt_encoded_text))
+            f.write(str(t))
         with open('Results/bwt_compression_ratio.txt', 'w') as f:
             f.write("len_original_text: "+str(len_original_text)+"\n")
             f.write("len_bwt_encoded_text: "+str(len(bwt_encoded_text))+"\n")
