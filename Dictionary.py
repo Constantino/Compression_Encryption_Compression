@@ -20,7 +20,7 @@ class Dictionary:
             l_value += len(dictionary[e])*freq[e]
 
         print "l_key: ",l_key," l_value: ",l_value
-        return (1.0*l_key)/l_value
+        return (1.0*l_key)/l_value,l_key,l_value
 
     def assignChars(self):
         # ASCII [33, ..., 202]
@@ -85,10 +85,10 @@ def dictionary_encoding(text, dictionary):
         if word in dicto:
             nstring = nstring + dicto[word] + ' '
     print "*** Dictionary: ",dicto
-    with open('Results/dictionary_and_compression_ratio.txt', 'w') as f:
+    #compression_ratio,lkey,lvalue = dictionary.get_self_compression_ratio(dicto)
+    with open('Results/dictionary.txt', 'w') as f:
             string = "Dictionary: \n"
             string += str(dicto)
-            string += "\n\nCompression ratio: "+str(dictionary.get_self_compression_ratio(dicto))
             f.write(string)
     return nstring
 

@@ -18,9 +18,17 @@ def frequencies_val(text):
     freq = Counter()
     len_text = len(text)
     for word in text.split():
-        freq[word.strip()] += 1.0/len_text
+        freq[word.strip()] += len(word)*1.0/len_text
     
     with open('Results/dictionary_frequencies.txt', 'w') as f:
             f.write("frequencies: \n")
             f.write(str(freq))
+
+    #check_freq(freq)
     return freq
+
+def check_freq(freq):
+    su = 0
+    for e in freq:
+        su += freq[e]
+    print "su freq: ",su

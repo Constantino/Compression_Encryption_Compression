@@ -15,26 +15,58 @@ class Person():
         print "original text"
         print original_text
 
+        len_original_text = 1.0*len(original_text)
+
         # Create dictionary
         dictionary = Dictionary(original_text)
 
         # Dictionary encoding
         encoded_text = dictionary_encoding(original_text, dictionary)
+        
+        dict_freq = frequencies_val(original_text)
+
         print "Dictionary encoded"
         print encoded_text
-        with open('Results/dictionary_encoding_output.txt', 'w') as f:
+
+        with open('Results/dictionary_encoding_output_and_compression_ratio.txt', 'w') as f:
             f.write("Encoded text: \n")
             f.write(encoded_text)
+            f.write("\n\nCompression ratio: "+str(len_original_text/len(encoded_text)))
         with open('dictionary_encoding_output.txt', 'w') as f:
             f.write(encoded_text)
 
         # Burrows-Wheeler Transform
         bwt_encoded_text = BWT(encoded_text)
-        print "BWT"
+        print "BWT:"
         print bwt_encoded_text
+        
+        with open('Results/bwt_encoded_text.txt', 'w') as f:
+            f.write(str(bwt_encoded_text))
+        with open('Results/bwt_compression_ratio.txt', 'w') as f:
+            f.write("len_original_text: "+str(len_original_text)+"\n")
+            f.write("len_bwt_encoded_text: "+str(len(bwt_encoded_text))+"\n")
+            f.write("Compression ratio: "+str(len_original_text/len(bwt_encoded_text)))
 
         # Run-length encoding
         rle_encoded_text = rle(bwt_encoded_text)
+
+        l_dictionary = 0
+        for e in dict_freq:
+            l_dictionary += len(e)*dict_freq[e]
+        l_original_text = len(original_text)
+        l_RLE = len(rle_encoded_text)
+        
+        print "l_dictionary: ",l_original_text
+        print "l_RLE: ",l_RLE
+
+        with open('Results/rle_encoded_text_and_compression_ratio.txt', 'w') as f:
+            f.write("original_text: \n")
+            f.write(original_text)
+            f.write("\n\nRLE encoded text:\n")
+            f.write(rle_encoded_text)
+            f.write("\n\nl_dictionary: "+str(l_original_text)+"\nl_RLE: "+str(l_RLE))
+            f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/l_RLE))
+
         print "RLE"
         print rle_encoded_text
 
