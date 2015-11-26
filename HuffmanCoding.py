@@ -75,7 +75,7 @@ def encode(string):
     last_bits = [str(bit) for bit in new_binary[-1]]
     last_bits = "".join(last_bits)
     new_string += '-'+last_bits+'-'
-    return new_string, root
+    return new_string, root, codes
 
 def get_symbol(node, bits, index):
     if node._left is None and node._right is None:
