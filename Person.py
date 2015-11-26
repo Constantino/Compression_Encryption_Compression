@@ -40,6 +40,8 @@ class Person():
             f.write("Encoded text: \n")
             f.write(encoded_text+"\n\nFrequencies after dictionary applied:\n")
             f.write(str(frequencies(encoded_text)))
+            f.write("\n\nlen_original_text: "+str(len_original_text)+"\n")
+            f.write("len_dictionary: "+str(len(encoded_text))+"\n")
             f.write("\n\nCompression ratio: "+str(len_original_text/len(encoded_text)))
         with open('dictionary_encoding_output.txt', 'w') as f:
             f.write(encoded_text)
