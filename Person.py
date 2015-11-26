@@ -112,6 +112,12 @@ class Person():
         with open('huffman_encoded_text', 'wb') as f:
             f.write(huffman_encoded_text)
 
+        with open('Results/huffman_output.txt', 'w') as f:
+            f.write("huffman_encoded_text:\n")
+            f.write(str(huffman_encoded_text))
+            f.write("\n\nFrequencies: \n\n"+str(frequencies_from_dictionary(huffman_encoded_text)))
+            f.write("\n\nlen_original_text: "+str(l_original_text)+"\nlen_RLE: "+str(len(huffman_encoded_text)))
+            f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/len(huffman_encoded_text)))
 
         return [huffman_encoded_text, huffman_root, key, encrypted, dictionary]
 

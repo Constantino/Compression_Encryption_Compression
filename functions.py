@@ -31,7 +31,6 @@ def frequencies_bv(text):
 
     return frequencies_from_dictionary(num_list)
 
-
 def frequencies_val(text):
     
     freq = Counter()
