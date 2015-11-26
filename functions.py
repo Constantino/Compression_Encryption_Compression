@@ -19,6 +19,19 @@ def frequencies_from_dictionary(text):
 
     return frequencies(new_text)
 
+def frequencies_bv(text):
+    num_list = []
+    t = ""
+    for e in text:
+        if e != ".":
+            t += e
+        if e == ".":
+            num_list.append(t)
+            t = ""
+
+    return frequencies_from_dictionary(num_list)
+
+
 def frequencies_val(text):
     
     freq = Counter()

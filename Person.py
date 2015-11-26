@@ -6,7 +6,7 @@ from RLE import rle, invert_rle
 from KeyGenerator import KeyGenerator
 from ReducedArrayEncryption import ReducedArrayEncryption 
 from ReducedArrayDecryption import ReducedArrayDecryption
-from functions import frequencies, frequencies_val,frequencies_from_dictionary
+from functions import *
 
 class Person():
     def __init__(self, name):
@@ -99,7 +99,7 @@ class Person():
 
             f.write("Begum_Venkataramani:\n")
             f.write(str(encrypted_text))
-            f.write("\n\nFrequencies: \n\n"+str(frequencies(rle_encoded_text)))
+            f.write("\n\nFrequencies: \n\n"+str(frequencies_bv(encrypted_text)))
             f.write("\n\nlen_original_text: "+str(l_original_text)+"\nlen_RLE: "+str(len(encrypted_text)))
             f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/len(encrypted_text)))
 
@@ -111,6 +111,7 @@ class Person():
         print huffman_encoded_text
         with open('huffman_encoded_text', 'wb') as f:
             f.write(huffman_encoded_text)
+
 
         return [huffman_encoded_text, huffman_root, key, encrypted, dictionary]
 
