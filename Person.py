@@ -106,15 +106,14 @@ class Person():
         ########################
 
         # Huffman coding
-        huffman_encoded_text, huffman_root = huffman_encode(encrypted_text) # The root will be necessary to decode
+        huffman_encoded_text, huffman_root, huffman_codes = huffman_encode(encrypted_text) # The root will be necessary to decode
         print "Huffman"
         print huffman_encoded_text
-        with open('huffman_encoded_text', 'wb') as f:
-            f.write(huffman_encoded_text)
 
         with open('Results/huffman_output.txt', 'w') as f:
             f.write("huffman_encoded_text:\n")
             f.write(str(huffman_encoded_text))
+            f.write("\n\nCodes: \n\n"+str(huffman_codes))
             f.write("\n\nFrequencies: \n\n"+str(frequencies_from_dictionary(huffman_encoded_text)))
             f.write("\n\nlen_original_text: "+str(l_original_text)+"\nlen_RLE: "+str(len(huffman_encoded_text)))
             f.write("\n\nCompression ratio: "+str((1.0*l_original_text)/len(huffman_encoded_text)))
